@@ -1,3 +1,53 @@
-<p>
-  graph1 works!
-</p>
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body"> 
+              <h5 class="card-title">{{graphs.graph1.leyenda}}:</h5>
+                <app-doughnut-graph
+                  [chartData]="graphs.graph1.data"
+                  [chartLabels]="graphs.graph1.labels"
+                  [chartType]="graphs.graph1.type"
+                ></app-doughnut-graph>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body"> 
+                <h5 class="card-title">{{graphs.graph2.leyenda}}:</h5>
+                <app-doughnut-graph
+                  [chartData]="graphs.graph2.data"
+                  [chartLabels]="graphs.graph2.labels"
+                  [chartType]="graphs.graph2.type"
+                ></app-doughnut-graph>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body"> 
+                <h5 class="card-title">{{graphs.graph3.leyenda}}:</h5>
+                <app-doughnut-graph
+                  [chartData]="graphs.graph3.data"
+                  [chartLabels]="graphs.graph3.labels"
+                  [chartType]="graphs.graph3.type"
+                ></app-doughnut-graph>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body"> 
+                <h5 class="card-title">{{graphs.graph4.leyenda}}:</h5>
+                <app-doughnut-graph
+                  [chartData]="graphs.graph4.data"
+                  [chartLabels]="graphs.graph4.labels"
+                  [chartType]="graphs.graph4.type"
+                ></app-doughnut-graph>
+            </div>
+        </div>
+    </div>
+</div>
