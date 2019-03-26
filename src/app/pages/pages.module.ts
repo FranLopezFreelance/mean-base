@@ -13,6 +13,8 @@ import { ProgressComponent } from './progress/progress.component';
 import { Graph1Component } from './graph1/graph1.component';
 import { IncrementComponent } from '../components/increment/increment.component';
 import { DoughnutGraphComponent } from '../components/doughnut-graph/doughnut-graph.component';
+import { PromisesComponent } from './promises/promises.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { DoughnutGraphComponent } from '../components/doughnut-graph/doughnut-gr
         Graph1Component,
         IncrementComponent,
         DoughnutGraphComponent,
-        AccountSettingsComponent
+        AccountSettingsComponent,
+        PromisesComponent,
+        RxjsComponent
     ],
     exports: [
         PagesComponent,
