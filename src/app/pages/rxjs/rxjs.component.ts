@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscriber, Subscription } from 'rxjs';
-import { retry, map, filter } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rxjs',
@@ -13,9 +13,6 @@ export class RxjsComponent implements OnInit, OnDestroy {
 
   constructor() {
     this.subsciption = this.returnObserver()
-    // .pipe(
-    //   retry(1)
-    // )
     .subscribe(
       number => console.log(number),
       error => console.error('Error: ', error),
