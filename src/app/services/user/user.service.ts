@@ -5,6 +5,7 @@ import { URL_SERVICES } from 'src/app/config/config';
 import swal from 'sweetalert';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { UploadImageService } from '../uploadImage/upload-image.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class UserService {
 
   constructor(
     public http: HttpClient,
-    public router: Router
+    public router: Router,
+    public uploadImageService: UploadImageService
   ) {
     this.loadFromStorage();
   }
@@ -98,6 +100,29 @@ export class UserService {
     localStorage.removeItem('id');
 
     this.router.navigate(['/login']);
+  }
+
+  updateUser(user: User) {
+    const url = URL_SERVICES + 'users/' + user._id + '?token=' + this.token;
+
+    return this.http.put( url, user).pipe(
+      map( (resp: any) => {
+        this.saveInStorage(resp.id, resp.token, resp.user);
+        return true;
+      })
+    );
+  }
+
+  changeImage(file: File, id: string) {
+    this.uploadImageService.uploadImage(file, 'users', id)
+      .then( (resp: any) => {
+        this.user.img = resp.user.img;
+        this.saveInStorage(resp.id, this.token, resp.user);
+        swal('Imágen Actualizada', this.user.name, 'success');
+      })
+      .catch( resp => {
+        console.log(resp);
+      });
   }
 
 }
