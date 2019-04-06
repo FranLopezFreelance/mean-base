@@ -8,9 +8,9 @@ import {
   SharedService,
   SidebarService,
   UserService,
+  HospitalService,
   LoginGuard
 } from './service.index';
-import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 @NgModule({
   declarations: [],
@@ -25,7 +25,8 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
     UserService,
     LoginGuard,
     UploadImageService,
-    ModalUploadService
+    ModalUploadService,
+    HospitalService
   ]
 })
 export class ServiceModule { }

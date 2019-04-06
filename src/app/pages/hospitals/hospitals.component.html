@@ -1,0 +1,65 @@
+<div class="row anmated fadeIn">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <input #input (keyup)="searchHospital( input.value )" type="text" class="form-control" placeholder="Buscar Hospital">
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row anmated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+              <h3>Hospitales <small>( {{ total }} )</small>
+                <button (click)="showCreateForm()" type="button" class="btn btn-success waves-effect waves-light pull-right">
+                    <i class="fa fa-plus"></i> Crar Hospital
+                </button>
+              </h3>
+
+              <br />
+
+              <div *ngIf="createForm" class="alert alert-success alert-rouded">  
+                <form ngNativeValidate #f="ngForm" class="form" (ngSubmit)="createHospital( f )">     
+                  <table class="table">
+                    <tr>
+                      <td><input ngModel name="name" class="form-control" type="text" placeholder="Nombre del Hospital" required></td>
+                      <td>
+                        <button type="submit" class="btn btn-info waves-effect waves-light">
+                          Crear
+                        </button>
+                      </td>
+                    </tr>
+                  </table>
+                </form> 
+              </div>
+
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Imágen</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let hospital of hospitals">
+                    <td width="30"><img width="30" [src]="hospital.img | image:'hospitals'" (click)="showModal(hospital._id)" class="img-circle" /></td>
+                    <td><input class="form-control" [(ngModel)]="hospital.name" name="name" type="text" placeholder="Nombre del Hospital"></td>
+                    <td>
+                      <button title="Guardar" (click)="updateHospital(hospital)" class="btn btn-info"><i class="fa fa-save"></i></button>
+                      <button title="Eliminar" (click)="deleteHospital(hospital)" class="btn mi btn-danger"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="!hospitals">
+                  <tr>
+                    <td colspan="3"><h5>No se encontraron registros que coicidan con la búsqueda</h5></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+  </div>

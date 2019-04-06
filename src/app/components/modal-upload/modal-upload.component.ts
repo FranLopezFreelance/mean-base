@@ -47,9 +47,11 @@ export class ModalUploadComponent implements OnInit {
       this.modalUploadService.model,
       this.modalUploadService.id
     ).then( (resp: any) => {
-      if (resp.user._id === this.userService.user._id) {
-        this.userService.user.img = resp.user.img;
-        this.userService.saveInStorage(resp.user._id, this.userService.token, this.userService.user);
+      if (resp.user) {
+        if (resp.user._id === this.userService.user._id) {
+          this.userService.user.img = resp.user.img;
+          this.userService.saveInStorage(resp.user._id, this.userService.token, this.userService.user);
+        }
       }
       this.modalUploadService.notifacation.emit(resp);
       this.hideModal();

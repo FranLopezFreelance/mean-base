@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/service.index';
 import { ModalUploadService } from 'src/app/components/modal-upload/modal-upload.service';
@@ -91,7 +90,7 @@ export class UsersComponent implements OnInit {
         this.page = 1;
         this.loadUsers();
       });
-    }
+  }
 
   saveUser(user: User) {
     this.userService.updateUser(user)
