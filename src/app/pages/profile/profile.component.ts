@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/service.index';
-import swal from 'sweetalert';
 
 @Component({
   selector: 'app-profile',
@@ -31,7 +30,7 @@ export class ProfileComponent implements OnInit {
 
     this.userService.updateUser(this.user)
       .subscribe( resp => {
-        swal('Datos Guardados', 'La infomación se actualizó correctamente', 'success');
+
       });
   }
 
@@ -42,7 +41,6 @@ export class ProfileComponent implements OnInit {
     }
 
     if ( file.type.indexOf('image') < 0) {
-      swal('Sólo Imágenes', 'El archivo no es una imágen', 'error');
       this.selectedImage = null;
       return;
     }

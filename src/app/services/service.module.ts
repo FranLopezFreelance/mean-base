@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UploadImageService } from './uploadImage/upload-image.service';
+import {ModalUploadService} from '../components/modal-upload/modal-upload.service';
 import {
   SettingsService,
   SharedService,
@@ -9,6 +10,7 @@ import {
   UserService,
   LoginGuard
 } from './service.index';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 @NgModule({
   declarations: [],
@@ -22,7 +24,8 @@ import {
     SidebarService,
     UserService,
     LoginGuard,
-    UploadImageService
+    UploadImageService,
+    ModalUploadService
   ]
 })
 export class ServiceModule { }

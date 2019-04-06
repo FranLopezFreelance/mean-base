@@ -11,12 +11,12 @@ export class ImagePipe implements PipeTransform {
     let url = URL_SERVICES + 'img/';
 
     if (!img) {
-      return url + 'img_default?';
+      return url += 'img_default/123456789';
     }
 
-    /* if (img.indexOf('https') >= 0) {
+    if (img.indexOf('https') >= 0) {
       return img;
-    } */
+    }
 
     switch (model) {
       case 'users':
@@ -30,9 +30,8 @@ export class ImagePipe implements PipeTransform {
         break;
       default:
         console.log('Tipo de Imágen no existe');
-        url += 'img_default?';
+        url += 'img_default/1231324654';
     }
-
     return url;
   }
 

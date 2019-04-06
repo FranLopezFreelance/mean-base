@@ -15,9 +15,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.user;
-    if (!this.user.img) {
-      this.user.img = 'assets/images/users/default.jpg';
-    }
   }
 
 }

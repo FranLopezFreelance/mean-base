@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
 
                 <h6 class="card-subtitle">Actualizar Imágen</h6>
                 
@@ -16,10 +16,10 @@
                 
                 <button (click)="changeImage()" [disabled]="!selectedImage" type="submit" class="btn btn-success waves-effect waves-light m-r-10">Actualizar Imágen</button>
 
-                <hr /><br />
-
+            </div>
+            <div class="col-lg-6">
+              <div class="col-lg-8">
                 <h6 class="card-subtitle">Actualizar Información</h6>
-
 
                 <form ngNativeValidate #f="ngForm" (ngSubmit)="updateUser( f.value )" class="form p-t-20">
                 <div class="form-group">
@@ -39,6 +39,7 @@
                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Actualizar Información</button>
                 </form>
             </div>
-    </div>
+          </div>
+        </div>
     </div>
 </div>

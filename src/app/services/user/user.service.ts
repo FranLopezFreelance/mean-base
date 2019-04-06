@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICES } from 'src/app/config/config';
-import swal from 'sweetalert';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UploadImageService } from '../uploadImage/upload-image.service';
@@ -53,7 +52,6 @@ export class UserService {
     return this.http.post( url, user)
       .pipe(
         map( (resp: any) => {
-          swal('Usuario Registrado!', user.email, 'success');
           return resp.usuario;
         })
       );
@@ -107,7 +105,10 @@ export class UserService {
 
     return this.http.put( url, user).pipe(
       map( (resp: any) => {
-        this.saveInStorage(resp.id, resp.token, resp.user);
+        if (user._id === this.user._id) {
+          const userDB: User = resp.user;
+          this.saveInStorage(userDB._id, this.token, userDB);
+        }
         return true;
       })
     );
@@ -118,11 +119,27 @@ export class UserService {
       .then( (resp: any) => {
         this.user.img = resp.user.img;
         this.saveInStorage(resp.id, this.token, resp.user);
-        swal('Imágen Actualizada', this.user.name, 'success');
       })
       .catch( resp => {
         console.log(resp);
       });
+  }
+
+  loadUsers(from: number = 0) {
+    const url = URL_SERVICES + 'users?from=' + from;
+    return this.http.get(url);
+  }
+
+  searchUsers(key: string) {
+    const url = URL_SERVICES + 'search/collection/users/' + key;
+    return this.http.get(url).pipe(
+      map( (resp: any) => resp.users )
+    );
+  }
+
+  deleteUser(id: string) {
+    const url = URL_SERVICES + 'users/' + id + '?token=' + this.token;
+    return this.http.delete(url);
   }
 
 }

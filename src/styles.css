@@ -3,6 +3,35 @@
     cursor: pointer;
 }
 
-.w150 {
-    width: 150px;
+.err-404 {
+    margin-top: 20%;
+}
+
+.center {
+    width: 120px;
+    margin: auto!important;
+}
+
+.mi {
+    margin-left: 15px!important;
+}
+
+.user-paginate {
+    width: 100px;
+    margin: 10px 35%;
+    position: absolute;
+}
+
+.hide {
+    display: none;
+}
+
+.black-backgrouund {
+    background-color: rgba(0, 0, 0, 0.6 );
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
 }
