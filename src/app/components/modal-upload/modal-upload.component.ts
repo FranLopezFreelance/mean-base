@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadImageService, UserService } from 'src/app/services/service.index';
 import { ModalUploadService } from './modal-upload.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-upload',
@@ -15,7 +16,9 @@ export class ModalUploadComponent implements OnInit {
   constructor(
     public uploadImageService: UploadImageService,
     public userService: UserService,
-    public modalUploadService: ModalUploadService) {
+    public modalUploadService: ModalUploadService,
+    private toastr: ToastrService
+  ) {
   }
 
   ngOnInit() {
@@ -54,6 +57,7 @@ export class ModalUploadComponent implements OnInit {
         }
       }
       this.modalUploadService.notifacation.emit(resp);
+      this.toastr.success('La imágen se actualizó correctamente', 'Imágen Actualizada');
       this.hideModal();
     })
     .catch( err => {

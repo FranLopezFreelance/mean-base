@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/service.index';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,10 @@ export class ProfileComponent implements OnInit {
   selectedImage: File;
   tempImage: any;
 
-  constructor(public userService: UserService) {
+  constructor(
+    public userService: UserService,
+    private toastr: ToastrService
+  ) {
     this.user = this.userService.user;
   }
 
@@ -30,7 +34,7 @@ export class ProfileComponent implements OnInit {
 
     this.userService.updateUser(this.user)
       .subscribe( resp => {
-
+        this.toastr.success('La información se actualizó correctamente', 'Información Actualizada');
       });
   }
 

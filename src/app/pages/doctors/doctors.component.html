@@ -1,0 +1,49 @@
+<div class="row anmated fadeIn">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <input #input (keyup)="searchDoctor( input.value )" type="text" class="form-control" placeholder="Buscar Médicos">
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row anmated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+              <h3>Médicos <small>( {{ total }} )</small>
+                <button type="button" class="btn btn-success waves-effect waves-light pull-right">
+                    <i class="fa fa-plus"></i> Nuevo Médico
+                </button>
+              </h3>
+
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Imágen</th>
+                    <th>Nombre</th>
+                    <th>Hospital</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let doctor of doctors">
+                    <td width="30"><img width="30" [src]="doctor.img | image:'doctors'" (click)="showModal(doctor._id)" class="img-circle" /></td>
+                    <td><input class="form-control" [(ngModel)]="doctor.name" name="name" type="text" placeholder="Nombre del Médico"></td>
+                    <td>
+                      <button title="Guardar" (click)="updateDoctor(doctor)" class="btn btn-info"><i class="fa fa-save"></i></button>
+                      <button title="Eliminar" (click)="deleteDoctor(doctor)" class="btn mi btn-danger"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="!doctors">
+                  <tr>
+                    <td colspan="3"><h5>No se encontraron registros que coicidan con la búsqueda</h5></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+  </div>

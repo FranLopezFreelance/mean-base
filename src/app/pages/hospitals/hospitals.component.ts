@@ -3,6 +3,7 @@ import { Hospital } from 'src/app/models/hospital.model';
 import { HospitalService } from 'src/app/services/service.index';
 import { ModalUploadService } from 'src/app/components/modal-upload/modal-upload.service';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-hospitals',
@@ -18,7 +19,8 @@ export class HospitalsComponent implements OnInit {
 
   constructor(
     public hospitalService: HospitalService,
-    public modalUploadService: ModalUploadService
+    public modalUploadService: ModalUploadService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -33,8 +35,11 @@ export class HospitalsComponent implements OnInit {
 
   createHospital( form: NgForm ) {
     this.hospitalService.createHospital(form.value.name)
-    .subscribe(resp => this.loadHospitals());
-    this.createForm = false;
+    .subscribe(resp => {
+      this.toastr.success('El Hospital se creó correctamente', 'Hospital Creado');
+      this.loadHospitals();
+      this.createForm = false;
+    });
   }
 
   loadHospitals() {
@@ -64,6 +69,7 @@ export class HospitalsComponent implements OnInit {
     this.hospitalService.updateHospital(hospital)
       .subscribe( resp  => {
         this.loadHospitals();
+        this.toastr.success('El Hospital se actualizó Correctamente', 'Hospital Actualizado');
       });
   }
 
@@ -71,6 +77,7 @@ export class HospitalsComponent implements OnInit {
     this.hospitalService.deleteHospital(hospital._id)
       .subscribe( resp  => {
         this.loadHospitals();
+        this.toastr.success('El Hospital se eliminó Correctamente', 'Hospital Eliminado');
       });
   }
 

@@ -5,6 +5,9 @@ import { URL_SERVICES } from 'src/app/config/config';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UploadImageService } from '../uploadImage/upload-image.service';
+import { ToastrService } from 'ngx-toastr';
+
+declare var M: any;
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,8 @@ export class UserService {
   constructor(
     public http: HttpClient,
     public router: Router,
-    public uploadImageService: UploadImageService
+    public uploadImageService: UploadImageService,
+    private toastr: ToastrService
   ) {
     this.loadFromStorage();
   }
@@ -52,6 +56,7 @@ export class UserService {
     return this.http.post( url, user)
       .pipe(
         map( (resp: any) => {
+          this.toastr.success('El Usuario se registró correctamente', 'Usuario Registrado');
           return resp.usuario;
         })
       );
@@ -119,6 +124,7 @@ export class UserService {
       .then( (resp: any) => {
         this.user.img = resp.user.img;
         this.saveInStorage(resp.id, this.token, resp.user);
+        this.toastr.success('La imágen se actualizó correctamente', 'Imágen Actualizada');
       })
       .catch( resp => {
         console.log(resp);

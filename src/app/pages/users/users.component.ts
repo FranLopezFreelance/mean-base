@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/service.index';
 import { ModalUploadService } from 'src/app/components/modal-upload/modal-upload.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users',
@@ -22,7 +23,8 @@ export class UsersComponent implements OnInit {
 
   constructor(
     public userService: UserService,
-    public modalUploadService: ModalUploadService
+    public modalUploadService: ModalUploadService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -89,12 +91,15 @@ export class UsersComponent implements OnInit {
         this.from = 0;
         this.page = 1;
         this.loadUsers();
+        this.toastr.success('El Usuario se eliminó correctamente', 'Usuario Eliminado');
       });
   }
 
   saveUser(user: User) {
     this.userService.updateUser(user)
-      .subscribe();
+      .subscribe( resp => {
+        this.toastr.success('El Usuario se actualizó correctamente', 'Usuario Actualizado');
+      });
   }
 
 }

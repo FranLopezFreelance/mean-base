@@ -13,6 +13,7 @@ import { LoginGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { HospitalsComponent } from './hospitals/hospitals.component';
+import { DoctorsComponent } from './doctors/doctors.component';
 
 
 const pagesRoutes: Routes = [
@@ -30,6 +31,7 @@ const pagesRoutes: Routes = [
             { path: 'profile', component: ProfileComponent, data: { title: 'Perfil de Usuario'}},
             { path: 'users', component: UsersComponent, data: { title: 'Mantenimiento de Usuarios'}},
             { path: 'hospitals', component: HospitalsComponent, data: { title: 'Mantenimiento de Hospitales'}},
+            { path: 'doctors', component: DoctorsComponent, data: { title: 'Mantenimiento de Médicos'}},
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     }
