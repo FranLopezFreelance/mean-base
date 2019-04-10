@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { URL_SERVICES } from 'src/app/config/config';
 import { HttpClient } from '@angular/common/http';
-import { UserService } from '../service.index';
+import { UserService } from '../user/user.service';
 import { Doctor } from 'src/app/models/doctor.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class DoctorService {
 
   constructor(
     public http: HttpClient,
-    public userService: UserService
+    public userService: UserService,
+    private toastr: ToastrService
   ) { }
 
   loadDoctors() {
@@ -23,6 +25,28 @@ export class DoctorService {
           return resp;
         })
       );
+  }
+
+  saveDoctor( doctor: Doctor) {
+    let url = URL_SERVICES + 'doctors';
+    if (doctor._id) {
+      url += '/' + doctor._id + '?token=' + this.userService.token;
+
+      return this.http.put(url, doctor).pipe(
+        map( (resp: any) => {
+          this.toastr.success('El Médico se actualizó correctamente', 'Médico Guardado');
+          return resp.doctor;
+        })
+      );
+    } else {
+      url += '?token=' + this.userService.token;
+      return this.http.post(url, doctor).pipe(
+        map( (resp: any) => {
+          this.toastr.success('El Médico se creó correctamente', 'Médico Creado');
+          return resp.doctor;
+        })
+      );
+    }
   }
 
   getDoctor(id: string) {

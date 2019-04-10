@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ChartsModule } from 'ng2-charts';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { PAGES_ROUTES } from './pages.routes';
 import { PagesComponent } from './pages.component';
@@ -23,6 +24,7 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorComponent } from './doctors/doctor.component';
+import { CroppingImagesComponent } from '../components/cropping-images/cropping-images.component';
 
 
 @NgModule({
@@ -39,6 +41,7 @@ import { DoctorComponent } from './doctors/doctor.component';
         ProfileComponent,
         UsersComponent,
         ModalUploadComponent,
+        CroppingImagesComponent,
         HospitalsComponent,
         DoctorsComponent,
         DoctorComponent
@@ -55,7 +58,8 @@ import { DoctorComponent } from './doctors/doctor.component';
         PAGES_ROUTES,
         FormsModule,
         ChartsModule,
-        PipesModule
+        PipesModule,
+        ImageCropperModule
     ]
 })
 

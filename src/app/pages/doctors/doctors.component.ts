@@ -3,6 +3,7 @@ import { DoctorService } from 'src/app/services/service.index';
 import { ModalUploadService } from 'src/app/components/modal-upload/modal-upload.service';
 import { ToastrService } from 'ngx-toastr';
 import { Doctor } from 'src/app/models/doctor.model';
+import { Hospital } from 'src/app/models/hospital.model';
 
 @Component({
   selector: 'app-doctors',
@@ -12,6 +13,8 @@ import { Doctor } from 'src/app/models/doctor.model';
 export class DoctorsComponent implements OnInit {
 
   doctors: Doctor[] = [];
+  doctor: Doctor;
+  hospital: Hospital;
   total: number = 0;
 
   constructor(
@@ -58,11 +61,13 @@ export class DoctorsComponent implements OnInit {
   }
 
   deleteDoctor(doctor: Doctor) {
-    this.doctorService.deleteDoctor(doctor._id)
-      .subscribe( resp  => {
-        this.loadDoctors();
-        this.toastr.success('El médico se eliminó Correctamente', 'médico Eliminado');
-      });
+    if (confirm('¿Seguro que quieres eliminarlo?')) {
+      this.doctorService.deleteDoctor(doctor._id)
+        .subscribe( resp  => {
+          this.loadDoctors();
+          this.toastr.success('El médico se eliminó Correctamente', 'médico Eliminado');
+        });
+    }
   }
 
   showModal(id: string) {

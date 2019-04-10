@@ -1,4 +1,4 @@
-<div class="row anmated fadeIn">
+<div class="row animated fadeIn">
   <div class="col-12">
       <div class="card">
           <div class="card-body">
@@ -7,13 +7,13 @@
         </div>
     </div>
 </div>
-<div class="row anmated fadeIn">
+<div class="row animated fadeIn">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
 
               <h3>Médicos <small>( {{ total }} )</small>
-                <button type="button" class="btn btn-success waves-effect waves-light pull-right">
+                <button [routerLink]="['/doctor', 'new']" type="button" class="btn btn-success waves-effect waves-light pull-right">
                     <i class="fa fa-plus"></i> Nuevo Médico
                 </button>
               </h3>
@@ -29,10 +29,11 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let doctor of doctors">
-                    <td width="30"><img width="30" [src]="doctor.img | image:'doctors'" (click)="showModal(doctor._id)" class="img-circle" /></td>
-                    <td><input class="form-control" [(ngModel)]="doctor.name" name="name" type="text" placeholder="Nombre del Médico"></td>
+                    <td width="30"><img width="30" [src]="doctor.img | image:'doctors'" (click)="showModal(doctor._id)" title="Editar Imágen" class="img-circle pointer" /></td>
+                    <td>{{ doctor.name }}</td>
+                    <td>{{ doctor.hospital.name }}</td>
                     <td>
-                      <button title="Guardar" (click)="updateDoctor(doctor)" class="btn btn-info"><i class="fa fa-save"></i></button>
+                      <button title="Editar" [routerLink]="['/doctor', doctor._id]" class="btn btn-info"><i class="fa fa-edit"></i></button>
                       <button title="Eliminar" (click)="deleteDoctor(doctor)" class="btn mi btn-danger"><i class="fa fa-trash-o"></i></button>
                     </td>
                   </tr>

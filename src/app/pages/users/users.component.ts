@@ -84,15 +84,18 @@ export class UsersComponent implements OnInit {
 
   deleteUser(user: User) {
     if (user._id === this.userService.user._id) {
+      this.toastr.warning('No puedes eliminarte a ti mismo', 'No permitido');
       return;
     }
-    this.userService.deleteUser(user._id)
-      .subscribe( resp  => {
-        this.from = 0;
-        this.page = 1;
-        this.loadUsers();
-        this.toastr.success('El Usuario se eliminó correctamente', 'Usuario Eliminado');
-      });
+    if (confirm('¿Seguro que quieres eliminarlo?')) {
+      this.userService.deleteUser(user._id)
+        .subscribe( resp  => {
+          this.from = 0;
+          this.page = 1;
+          this.loadUsers();
+          this.toastr.success('El Usuario se eliminó correctamente', 'Usuario Eliminado');
+        });
+    }
   }
 
   saveUser(user: User) {

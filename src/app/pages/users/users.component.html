@@ -1,4 +1,4 @@
-<div class="row anmated fadeIn">
+<div class="row animated fadeIn">
   <div class="col-12">
       <div class="card">
           <div class="card-body">
@@ -7,7 +7,7 @@
         </div>
     </div>
 </div>
-<div class="row anmated fadeIn" *ngIf="loading">
+<div class="row animated fadeIn" *ngIf="loading">
   <div class="center">
         <div class="alert alert-success text-center">
             <i class="fa fa-refresh fa-spin fa-2x"></i>
@@ -16,7 +16,7 @@
           </div>
   </div>
 </div>
-<div class="row anmated fadeIn" *ngIf="!loading">
+<div class="row animated fadeIn" *ngIf="!loading">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -35,11 +35,11 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let user of users">
-                    <td width="30"><img width="30" [src]="user.img | image" (click)="showModal(user._id)" class="img-circle" /></td>
+                    <td width="30"><img width="30" [src]="user.img | image:'users'" (click)="showModal(user._id)" title="Editar Imágen" class="img-circle pointer" /></td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
                     <td>
-                      <select [(ngModel)]="user.role" name="role" class="form-control">
+                      <select title="Editar Rol" [(ngModel)]="user.role" name="role" class="form-control">
                         <option value="ADMIN_ROLE">Administrador</option>
                         <option value="USER_ROLE">Usuario</option>
                       </select>
@@ -49,8 +49,8 @@
                       <label *ngIf="!user.google" class="label label-warning">Normal</label>
                     </td>
                     <td>
-                      <button title="Guardar Cambios" (click)="saveUser(user)" class="btn btn-info"><i class="fa fa-save"></i></button>
-                      <button title="Eliminar Usuario" (click)="deleteUser(user)" class="btn mi btn-danger"><i class="fa fa-trash-o"></i></button>
+                      <button title="Guardar" (click)="saveUser(user)" class="btn btn-info"><i class="fa fa-save"></i></button>
+                      <button title="Eliminar" (click)="deleteUser(user)" class="btn mi btn-danger"><i class="fa fa-trash-o"></i></button>
                     </td>
                   </tr>
                 </tbody>

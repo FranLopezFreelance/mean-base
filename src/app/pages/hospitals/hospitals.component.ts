@@ -74,11 +74,13 @@ export class HospitalsComponent implements OnInit {
   }
 
   deleteHospital(hospital: Hospital) {
-    this.hospitalService.deleteHospital(hospital._id)
-      .subscribe( resp  => {
-        this.loadHospitals();
-        this.toastr.success('El Hospital se eliminó Correctamente', 'Hospital Eliminado');
-      });
+    if (confirm('¿Seguro que quieres eliminarlo?')) {
+      this.hospitalService.deleteHospital(hospital._id)
+        .subscribe( resp  => {
+          this.loadHospitals();
+          this.toastr.success('El Hospital se eliminó Correctamente', 'Hospital Eliminado');
+        });
+    }
   }
 
   showModal(id: string) {
