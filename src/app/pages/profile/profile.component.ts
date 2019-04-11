@@ -35,6 +35,10 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(this.user)
       .subscribe( resp => {
         this.toastr.success('La información se actualizó correctamente', 'Información Actualizada');
+      },
+      err => {
+        console.log(err);
+        this.toastr.error('Ese Email ya existe', 'Error');
       });
   }
 

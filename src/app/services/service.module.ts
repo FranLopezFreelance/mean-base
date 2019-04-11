@@ -10,7 +10,8 @@ import {
   UserService,
   HospitalService,
   DoctorService,
-  LoginGuard
+  LoginGuard,
+  AdminGuard
 } from './service.index';
 
 @NgModule({
@@ -20,10 +21,11 @@ import {
     HttpClientModule
   ],
   providers: [
+    LoginGuard,
+    AdminGuard,
     SettingsService,
     SharedService,
     SidebarService,
-    LoginGuard,
     UploadImageService,
     ModalUploadService,
     UserService,

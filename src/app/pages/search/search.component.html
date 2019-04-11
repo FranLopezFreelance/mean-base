@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-4">
+    <div class="card-body">
+      <h4 class="card-title">Usuarios ({{ totUsers }})</h4>
+        <table class="table table-hover">
+            <tr class="pointer" routerLink="/users" *ngFor="let user of users">
+              <td><img width="30" [src]="user.img | image" /></td>
+              <td>{{ user.name }}</td>
+            </tr>
+            <h5 *ngIf="!users">Sin resultados</h5>
+        </table>
+    </div>
+  </div>
+
+  <div class="col-4">
+      <div class="card-body">
+        <h4 class="card-title">Hospitales ({{ totHospitals }})</h4>
+          <table class="table table-hover">
+            <tr class="pointer" routerLink="/hospitals" *ngFor="let hospital of hospitals">
+              <td><img width="30" [src]="hospital.img | image:'hospitals'" /></td>
+              <td>{{ hospital.name }}</td>
+            </tr>
+            <h5 *ngIf="!hospitals">Sin resultados</h5>
+          </table>
+      </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card-body">
+          <h4 class="card-title">Médicos ({{ totDoctors }})</h4>
+            <table class="table table-hover">
+              <tr class="pointer" routerLink="/doctors" *ngFor="let doctor of doctors">
+                  <td><img width="30" [src]="doctor.img | image:'doctors'" /></td>
+                  <td>{{ doctor.name }}</td>
+                </tr>
+                <h5 *ngIf="!doctors">Sin resultados</h5>
+            </table>
+        </div>
+      </div>
+
+</div>

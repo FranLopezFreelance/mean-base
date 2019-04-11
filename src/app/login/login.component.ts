@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../services/service.index';
 import { User } from '../models/user.model';
+import { ToastrService } from 'ngx-toastr';
 
 declare function init_plugins();
 declare const gapi: any;
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public userService: UserService
+    public userService: UserService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -65,7 +67,14 @@ export class LoginComponent implements OnInit {
 
     const user = new User(null, form.value.email, form.value.password);
     this.userService.login( user, form.value.rememberme)
-      .subscribe( () => window.location.href = '#/dashboard');
+    .subscribe(
+      resp => {
+        this.router.navigate(['/dashboard']);
+      },
+      err => {
+        this.toastr.error(err.error.message, 'Error');
+      }
+    );
   }
 
 }

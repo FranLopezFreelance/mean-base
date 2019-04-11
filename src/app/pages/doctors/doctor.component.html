@@ -10,7 +10,7 @@
                       <label>Nombre</label>
                       <input [(ngModel)]="doctor.name" name="name" type="text" class="form-control" placeholder="Nombre del Médico" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group"> 
                       <label>Hospital</label>
                       <select (change)="changeHospital( $event.target.value )" [(ngModel)]="doctor.hospital" name="hospital" class="form-control" required>
                           <option value="">Seleccionar Hospital</option>

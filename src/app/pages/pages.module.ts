@@ -25,6 +25,7 @@ import { HospitalsComponent } from './hospitals/hospitals.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorComponent } from './doctors/doctor.component';
 import { CroppingImagesComponent } from '../components/cropping-images/cropping-images.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { CroppingImagesComponent } from '../components/cropping-images/cropping-
         CroppingImagesComponent,
         HospitalsComponent,
         DoctorsComponent,
-        DoctorComponent
+        DoctorComponent,
+        SearchComponent
     ],
     exports: [
         PagesComponent,

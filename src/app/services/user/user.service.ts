@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ErrorHandler } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICES } from 'src/app/config/config';
@@ -7,8 +7,6 @@ import { Router } from '@angular/router';
 import { UploadImageService } from '../uploadImage/upload-image.service';
 import { ToastrService } from 'ngx-toastr';
 
-declare var M: any;
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +14,7 @@ export class UserService {
 
   user: User;
   token: string;
+  menu: any[] = [];
 
   constructor(
     public http: HttpClient,
@@ -34,19 +33,23 @@ export class UserService {
     if (localStorage.getItem('token')) {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.token = localStorage.getItem('token');
+      this.menu = JSON.parse(localStorage.getItem('menu'));
     } else {
       this.token = '';
       this.user = null;
+      this.menu = [];
     }
   }
 
-  saveInStorage(id: string, token: string, user: User) {
+  saveInStorage(id: string, token: string, user: User, menu: any) {
     this.user = user;
     this.token = token;
+    this.menu = menu;
 
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('menu', JSON.stringify(menu));
   }
 
   // Register
@@ -68,7 +71,8 @@ export class UserService {
     return this.http.post( url, { token } )
       .pipe(
         map( (resp: any) => {
-          this.saveInStorage(resp.id, resp.token, resp.user);
+          this.saveInStorage(resp.id, resp.token, resp.user, resp.menu);
+          console.log(resp);
           return true;
         })
       );
@@ -88,7 +92,7 @@ export class UserService {
     return this.http.post( url, user)
       .pipe(
         map( (resp: any) => {
-          this.saveInStorage(resp.id, resp.token, resp.user);
+          this.saveInStorage(resp.id, resp.token, resp.user, resp.menu);
           return true;
         })
       );
@@ -101,6 +105,7 @@ export class UserService {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('id');
+    localStorage.removeItem('menu');
 
     this.router.navigate(['/login']);
   }
@@ -112,7 +117,7 @@ export class UserService {
       map( (resp: any) => {
         if (user._id === this.user._id) {
           const userDB: User = resp.user;
-          this.saveInStorage(userDB._id, this.token, userDB);
+          this.saveInStorage(userDB._id, this.token, userDB, this.menu);
         }
         return true;
       })
@@ -123,7 +128,7 @@ export class UserService {
     this.uploadImageService.uploadImage(file, 'users', id)
       .then( (resp: any) => {
         this.user.img = resp.user.img;
-        this.saveInStorage(resp.id, this.token, resp.user);
+        this.saveInStorage(resp.id, this.token, resp.user, resp.menu);
         this.toastr.success('La imágen se actualizó correctamente', 'Imágen Actualizada');
       })
       .catch( resp => {

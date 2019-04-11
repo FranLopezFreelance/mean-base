@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../services/service.index';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 declare function init_plugins();
 
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     public userService: UserService,
-    public router: Router
+    public router: Router,
+    private toastr: ToastrService
   ) { }
 
   passValidate(p: string, p2: string) {
@@ -63,7 +65,14 @@ export class RegisterComponent implements OnInit {
     );
 
     this.userService.createUser( user )
-      .subscribe( resp => this.router.navigate(['/login']));
+    .subscribe(
+      resp => {
+        this.router.navigate(['/login']);
+      },
+      err => {
+        this.toastr.error('El Email ya existe', 'Error');
+      }
+    );
   }
 
 }
